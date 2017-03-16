@@ -16,7 +16,7 @@
   - Open broswer
   - go to localhost:3000
  
-## That's it. Enjoy
+
    
 ## This application is meet follow requiements
 ### Add a note 
@@ -37,3 +37,5 @@
 
 ### Delete a note with a given id
 - DELETE /note/:id
+
+## That's it. Enjoy
