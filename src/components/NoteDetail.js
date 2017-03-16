@@ -20,6 +20,7 @@ class NoteDetail extends Component {
                 <div className="title">{this.props.note.title}</div>
                 <div className="text">
                     <p>{this.props.note.content} </p>
+                    <p className="noteDate">{this.props.note.date}</p>
                 </div>
                 <div className="row">
                 <div className="col-md-6">

@@ -63,36 +63,16 @@ export function handleResponse(res){
 
 
 // get all note action, dispatch, this is GET
-export function fetchAllNotes(){
+export function fetchAllNotes(data){
+    console.log(data);
     // funtion(dispatch){} -- leanring now
     return dispatch => {
         // next time will try axios
-        fetch('/api/notes')
+        fetch(`/api/notes?limit=${data.limit}&start=${data.start}&order=${data.order}`)
             .then(res => res.json())
             .then(data => dispatch(setNotes(data.notes)));
     }
 }
-
-// fetch note by limit
-// get all note action, dispatch, this is GET
-export function fetchNotesUser(data){
-    console.log(data);
-     // funtion(dispatch){} -- leanring now
-    return dispatch => {
-        // fetch make promise, so we need to return
-        return fetch('/api/notes/user', {
-            method: 'get',
-            // fetch can only handle string,so we need change the json to string
-            body: JSON.stringify(data),
-            // use fetch you have to specify everything, so we need header here
-            headers: {
-                "Content-Type": "application/json"
-            }
-        }).then(handleResponse)
-        .then(data=>dispatch(getNotesByUser(data.notes)));
-    }
-}
-
 
 
 // take id to fetch note

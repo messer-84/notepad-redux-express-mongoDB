@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NoteList from './NoteList';
 // import NoteDetail from './NoteDetail';
-import { fetchAllNotes, deleteNote } from '../actions/actions';
+import { fetchAllNotes, deleteNote, fetchNotesUser } from '../actions/actions';
+
+const data = {
+  limit: 0,
+  start: 0,
+  order: 'asc'
+}
 
 class NotePad extends Component {
-
   /*  
   constructor()
   componentWillMount()
@@ -13,7 +18,7 @@ class NotePad extends Component {
   componentDidMount()
   */
   componentDidMount(){
-    this.props.fetchAllNotes();
+    this.props.fetchAllNotes(data);
   }
 
   render() {
@@ -21,7 +26,7 @@ class NotePad extends Component {
         <div className="container">
         <h1 className="notepad-title">NotePad (React Redux NodeJS MongoDB)</h1>
           <div className="row content">      
-              <NoteList notes={this.props.notes} deleteNote={this.props.deleteNote}/>
+              <NoteList notes={this.props.notes} deleteNote={this.props.deleteNote} fetchAllNotes={this.props.fetchAllNotes}/>
           </div>
         </div>
       );

@@ -29,14 +29,27 @@ app.listen(port, ()=>{
 var Note = require('./models/notes');
 
 // get all notes
-app.get('/api/notes',(req, res)=>{      
-    Note.find({}, (err, notes)=>{
-        if(err){
-            return res.status(500).json({error:{global: "Notes load failed"}});
-        }else{
-            return res.status(200).json({notes});
-        }
-    });
+app.get('/api/notes',(req, res)=>{
+    // change order
+    let order;
+    if(req.query.order == 'asc'){
+        order='date';
+    }else{
+        order='-date';
+    }
+    // find notes depends on request
+    Note.find({})
+        .limit(Number(req.query.limit))
+        .skip(Number(req.query.start))
+        .sort(order)
+        .exec((err, notes)=>{
+            if(err){
+                return res.status(500).json({error:{global: "Notes load failed"}});
+            }else{
+                //console.log(notes);
+                return res.status(200).json({notes});
+            }
+        })
 });
 
 // get one note by id
@@ -50,21 +63,20 @@ app.get('/api/notes/:_id',(req, res)=>{
     });
 });
 
-// get by user search
-app.get('/api/notes/user',(req, res)=>{
-    console.log("here");
-    console.log(req.body.start);
-    Note.find({})
-    .limit(req.body.limit)
-    .skip(req.body.start)
-    .exec((err, note)=>{
-        if(err){
-            return res.status(404).json({error: {global: "Notes Not Exist"}});
-        }else{
-            return res.status(200).json({note});
-        }
-    });
-});
+// // get by user search
+// app.get('/api/notes',(req, res)=>{
+//     console.log(res);
+//     Note.find({})
+//     .limit(req.body.limit)
+//     .exec((err, note)=>{
+//         if(err){
+//             return res.status(404).json({error: {global: "Notes Not Exist"}});
+//         }else{
+//             console.log({note});
+//             return res.status(200).json({note});
+//         }
+//     });
+// });
 
 // post a note
 app.post('/api/notes/add', (req,res)=>{

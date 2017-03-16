@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 // import NoteItem from './NoteItem';
 import NoteDetail from './NoteDetail';
-import {fetchNotesUser} from '../actions/actions';
 
 
 
@@ -14,6 +13,7 @@ class NoteList extends React.Component {
         popedOut: false,
         limit:'',
         start:'',
+        order: '',
     }
 
     setVisable = (note) => { 
@@ -26,6 +26,7 @@ class NoteList extends React.Component {
      // handle the change of the filed value
     // we pass in event, event's target is the element
     handleChange = (e) => { 
+        console.log(e.target.value);
             this.setState({
                 [e.target.name]: e.target.value,
         })
@@ -46,8 +47,8 @@ class NoteList extends React.Component {
         // when form is valid. then we loading the page for POST
         this.setState({loading: true});
         // call addNote action function
-        const { limit, start } = this.state;
-        fetchNotesUser({limit, start});
+        const { limit, start, order } = this.state;
+        this.props.fetchAllNotes({limit, start, order});
 
             // .catch((err) => err.response.json().then(
             //     // if error , set loading to false
@@ -63,12 +64,12 @@ class NoteList extends React.Component {
                 </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className="col-md-2">
-                        <div className="checkbox">
-                            <label><input type="checkbox" name="order" value="" checked/>ASC</label>
+                        <div>         
+                            <input type="radio" name="order" onChange={this.handleChange} value="asc"/> ASC
                         </div>
-                        <div className="checkbox">
-                            <label><input type="checkbox" name="order" value=""/>DESC</label>
-                        </div>
+                        <div>
+                            <input className="secondRadio" type="radio" name="order" onChange={this.handleChange} value="desc"/> DESC
+                        </div>                                   
                     </div>
                     <div className="col-md-2">
                         <input name='limit' type="text" onChange={this.handleChange} className="form-control input-sm search"  placeholder="Limit..." />                                       
@@ -118,7 +119,6 @@ class NoteList extends React.Component {
 NoteList.propTypes = {
     notes: React.PropTypes.array.isRequired,
     deleteNote: React.PropTypes.func.isRequired,
-    fetchNotesUser: React.PropTypes.func.isRequired
 }
 
 export default NoteList;
