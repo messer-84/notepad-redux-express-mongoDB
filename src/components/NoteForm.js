@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
-import classnames from 'classnames'; // use to combain class names
-
-
 
 class NoteForm extends Component {
     state = {
         _id: this.props.note ? this.props.note._id : null,
         title: this.props.note ? this.props.note.title : '',
         content: this.props.note ? this.props.note.content : '',
+        category: this.props.note ? this.props.note.category : '',
         image:'',
         error: {},
         loading: false,
     }
+
 
     // before render
     componentWillReceiveProps = (nextProps) => {
         this.setState({
         _id: nextProps.note._id,
         title: nextProps.note.title,
-        content: nextProps.note.content
+        content: nextProps.note.content,
+        category: nextProps.note.category,
     });
   }
 
@@ -47,10 +47,13 @@ class NoteForm extends Component {
         e.preventDefault();
         let error = {};
         if(this.state.title ===''){
-            error.title = "Title required, can't be empty!";          
+            error.title = "*Title required, can't be empty!";          
         }
         if(this.state.content ===''){
-            error.content = "Content required, can't be empty!";          
+            error.content = "*Content required, can't be empty!";          
+        }
+        if(this.state.category ===''){
+            error.category = "*Category required, can't be empty!";          
         }
 
         this.setState({
@@ -63,8 +66,8 @@ class NoteForm extends Component {
             // when form is valid. then we loading the page for POST
             this.setState({loading: true});
             // call addNote action function
-            const {_id, title, content} = this.state;
-            this.props.createNote({_id, title, content})
+            const {_id, title, content, category} = this.state;
+            this.props.createNote({_id, title, content, category})
                 .catch((err) => err.response.json().then(
                     // if error , set loading to false
                     ({error}) => this.setState({ error: error, loading: false })));
@@ -72,27 +75,44 @@ class NoteForm extends Component {
     };
     
     render() {
-        return (
-            <form className="ui form" onSubmit={this.handleSubmit}>
-                <h1>Add New Note</h1>
-                {!!this.state.error.global  && <div className="ui negative message">
-                <p>{this.state.error.global }</p></div>}
-                <div className={classnames('field', {error: !!this.state.error.title})}>
-                    <lable htmlFor="title">Title</lable>
-                    <input id="title" name='title' value={this.state.title} onChange={this.handleChange}/>
-                    <span>{this.state.error.title}</span>
+        return(
+            <div className="contianer form ">
+                <div className="row header">
+                    <div className="col-md-8 col-md-offset-5">
+                        <h1>Write Your Note</h1>
+                        <div className="titleline-icon"></div>
+                    </div>                  
                 </div>
-
-                <div className={classnames('field', {error: !!this.state.error.content})}>
-                    <lable htmlFor="content">Content</lable>
-                <textarea id="content" name='content' value={this.state.content} onChange={this.handleChange}/>
-                <span>{this.state.error.content}</span>
-                </div>
-                
-                <div className="field">
-                    <button className="ui primary button">Save</button>
-                </div>
-            </form>          
+                <div className="row content center-block">
+                    <div className="col-md-8 col-md-offset-3">
+                        <form  onSubmit={this.handleSubmit}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <div className='form-group'>
+                                        <input name='title' value={this.state.title} onChange={this.handleChange} className="form-control" placeholder="Your Name *"/>
+                                        <span className="inputError">{this.state.error.title}</span>
+                                    </div>
+                                    <div className='form-group'>
+                                        <input name="category" value={this.state.category} onChange={this.handleChange} className="form-control second" placeholder="Note Category *"/>
+                                        <span className="inputError">{this.state.error.category}</span>
+                                    </div>
+                                </div>
+                                <div className="col-md-5">
+                                    <div className='form-group'>
+                                        <textarea name='content' className="form-control" placeholder="Your Notes *" value={this.state.content} onChange={this.handleChange}></textarea>
+                                         <span className="inputError">{this.state.error.content}</span>
+                                    </div>
+                                </div>
+                                <div className="clearfix"></div>
+                                <div className="col-md-12 col-md-offset-4">
+                                    <button type="submit" className="send">Send Note</button>
+                                </div>
+                            </div>    
+                    </form>
+                </div>                
+            </div>
+        </div>
+     
         );
     }
 }

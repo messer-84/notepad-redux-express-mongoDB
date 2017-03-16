@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import NoteList from './NoteList';
+// import NoteDetail from './NoteDetail';
 import { fetchAllNotes, deleteNote } from '../actions/actions';
-import '../App.scss';
 
 class NotePad extends Component {
 
@@ -17,16 +17,14 @@ class NotePad extends Component {
   }
 
   render() {
-    return (
-      <div className="container">
-      <h1>NotePad (React Redux NodeJS MongoDB)</h1>
-        <div className="row">  
-          <div className="col-md-5">       
-            <NoteList notes={this.props.notes} deleteNote={this.props.deleteNote}/>
+      return (
+        <div className="container">
+        <h1 className="notepad-title">NotePad (React Redux NodeJS MongoDB)</h1>
+          <div className="row content">      
+              <NoteList notes={this.props.notes} deleteNote={this.props.deleteNote}/>
           </div>
         </div>
-      </div>
-    );
+      );
   }
 }
 

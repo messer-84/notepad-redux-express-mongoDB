@@ -1,2 +1,207 @@
-h1 {
-  color: red; }
+body{
+
+    background-color: #222222;
+    background-image: url('http://artdnaswitchbd.com/componants/images/map-image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    color:white;
+}
+
+
+/*note detail*/
+.notepad-title {
+  text-align: center; 
+  color:ghostwhite;
+  margin-top: 50px;
+}
+
+
+.content{
+  margin-top: 50px;
+}
+
+.note-detail {
+  margin-left: 150px;
+  min-width: 500px;
+  min-height: 500px;
+  position: fixed;
+  text-align: center; 
+  color:white;
+  margin-top: 50px;
+  animation-name: moveUp;
+  animation-duration: 1s;
+
+}
+
+.note-detail h1{
+   color:white;
+}
+
+
+.note-detail .note {
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 5%;
+  text-align: center;
+  min-height: 350px;
+  position: relative;
+  margin-bottom: 20px; 
+  background: white;
+}
+
+.note-detail .title {
+  text-align: center;
+  color:black;
+  font-size: 25px;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+}
+
+.note-detail .text {
+  margin-top: 20px; 
+  margin-bottom: 15px;
+  font-size: 25px;
+  text-align: justify; 
+  min-height: 200px;
+  border-bottom: 1px solid black;
+  color:black;
+}
+
+.link{
+    background-color: Transparent;
+    border: 2px solid black;
+    cursor:pointer;
+    color: black;
+    word-spacing: 30px;
+    font-size: 20px;
+    padding: 8px;
+    letter-spacing: 1px;
+}
+
+.link:hover{
+  background-color: Transparent;
+  border: 2px solid deeppink;
+  color:deeppink;
+  text-decoration-line: none;
+}
+
+
+.note-detail .fa{
+  margin-left: 5px;
+}
+/*=========================note detail end================================*/
+
+
+/*=========================List notes===============================*/
+
+
+.list-title{
+  color:white;
+}
+
+
+.list-group{
+  color:black;
+  width: atuo;
+}
+
+.list-group li {
+  margin-top: 15px;
+  animation-name: move;
+  animation-duration: 1s;
+}
+
+.list-group li:hover {
+  margin-top: 15px;
+  cursor: pointer;
+  border: 2px, solid;
+  background: lemonchiffon;
+  transform: rotateZ(-5deg);
+}
+
+button{
+    border: 2px solid black;
+    cursor:pointer;
+    color: black;
+    font-size: 20px;
+    padding: 8px;
+    letter-spacing: 1px;
+    background: white;
+}
+
+button:hover{
+  background-color: Transparent;
+  border: 2px solid deeppink;
+  color:deeppink;
+  text-decoration-line: none;
+}
+
+input.search{
+  font-size: 20px;
+  height: 50px;
+  padding: 8px;
+}
+
+input[type=checkbox] {
+  transform: scale(1.8); 
+}
+
+label{
+  font-size: 20px;
+}
+
+@keyframes move {
+   from {transform: translateX(-100px)}
+   to {transform: translateX(0px)}
+}
+
+@keyframes moveUp {
+   0%  {transform: translateY(100px)}
+   50% {transform: translateY(-150px)}
+   100% {transform: translateY(0px)}
+}
+
+/*=========================List notes end===============================*/
+
+
+/*===========================Form===============================*/
+.form {
+  padding: 30px 0PX;
+  margin-top:50px;
+}
+
+.form-group{
+   margin-bottom: 25px;
+}
+
+.form-control:focus{
+    border-color: deeppink;
+}
+
+.form-group input{
+  padding: 20px;
+  height: auto;
+  font-size: 25px;
+}
+
+.form-control {
+  border: 2px solid black;
+}
+
+.form-control.second{
+  margin-top: 30px;
+}
+
+
+.form-group textarea{
+  height: 250px;
+  font-size: 20px;
+}
+
+span.inputError{
+  color: red;
+  font-size: 20px;
+  font-style: italic;
+}
+/*===========================Form end===============================*/

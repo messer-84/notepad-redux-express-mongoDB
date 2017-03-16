@@ -19,14 +19,14 @@ class NoteFormController extends Component {
   }
 
     // create a new note, if note already exist then update a note
-    createNote = ({_id, title, content})=>{
+    createNote = ({_id, title, content, category})=>{
         if(_id){
             // update note and set loading to true
-            return this.props.updateNote({_id, title, content})
+            return this.props.updateNote({_id, title, content, category})
                 .then(()=>{this.setState({redirect: true})},
                 );
         }else{
-            return this.props.createNote({title, content})
+            return this.props.createNote({title, content, category})
                 .then(()=>{this.setState({redirect: true})},
                 ); 
             }  
@@ -35,7 +35,7 @@ class NoteFormController extends Component {
     render() {
         return (
             <div>
-                {this.state.redirect ? <Redirect to='/notePad'/> : 
+                {this.state.redirect ? <Redirect to='/'/> : 
                 <NoteForm note={this.props.note}
                 createNote={this.createNote}/>}
             </div>

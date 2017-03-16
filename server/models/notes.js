@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var NoteSchema = new Schema({
     title: {type: String, required:true},
     content: {type: String, required:true},
+    category: {type: String, required:true},
     date: { type: Date, default: Date.now },
 });
 // create model if not exists.

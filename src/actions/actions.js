@@ -1,9 +1,10 @@
-// action: fetch notes from the database
-export const GET_NOTES = 'SET_NOTES';
+// action: fetch, update, delete notes from the database
+export const GET_NOTES = 'GET_NOTES';
 export const ADD_NOTE = 'ADD_NOTE';
 export const FETCH_NOTE = 'FETCH_ONE_NOTE';
 export const EDIT_NOTE = 'FETCH_ONE_NOTE';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
+export const GET_NOTE_USER = 'GET_NOTE_USER';
 
 export function setNotes(notes){
     return{
@@ -40,6 +41,13 @@ export function removeNote(id){
     }
 }
 
+export function getNotesByUser(notes){
+        return{
+        type: GET_NOTE_USER,
+        notes
+    }
+}
+
 // handle errors from the server
 export function handleResponse(res){
     // everything fine status is 200
@@ -64,6 +72,28 @@ export function fetchAllNotes(){
             .then(data => dispatch(setNotes(data.notes)));
     }
 }
+
+// fetch note by limit
+// get all note action, dispatch, this is GET
+export function fetchNotesUser(data){
+    console.log(data);
+     // funtion(dispatch){} -- leanring now
+    return dispatch => {
+        // fetch make promise, so we need to return
+        return fetch('/api/notes/user', {
+            method: 'get',
+            // fetch can only handle string,so we need change the json to string
+            body: JSON.stringify(data),
+            // use fetch you have to specify everything, so we need header here
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(handleResponse)
+        .then(data=>dispatch(getNotesByUser(data.notes)));
+    }
+}
+
+
 
 // take id to fetch note
 export function fetchOneNote(id){

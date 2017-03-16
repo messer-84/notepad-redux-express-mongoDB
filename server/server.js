@@ -50,18 +50,36 @@ app.get('/api/notes/:_id',(req, res)=>{
     });
 });
 
+// get by user search
+app.get('/api/notes/user',(req, res)=>{
+    console.log("here");
+    console.log(req.body.start);
+    Note.find({})
+    .limit(req.body.limit)
+    .skip(req.body.start)
+    .exec((err, note)=>{
+        if(err){
+            return res.status(404).json({error: {global: "Notes Not Exist"}});
+        }else{
+            return res.status(200).json({note});
+        }
+    });
+});
+
 // post a note
 app.post('/api/notes/add', (req,res)=>{
     var note = new Note();
     let error ={};
     if (req.body.title === '') error.title = "Can't be empty";
     if (req.body.content === '') error.content = "Can't be empty";
+    if (req.body.category === '') error.content = "Can't be empty";
     const isValid = Object.keys(error).length === 0
     if(!isValid){
         return res.status(500).json({error});
     }else{
         note.title = req.body.title;
         note.content = req.body.content;
+        note.category = req.body.category;
         note.save(function(err){
             if(err){
                     res.status(500).json({error: {global: 'Note already Exist'}});
@@ -74,18 +92,18 @@ app.post('/api/notes/add', (req,res)=>{
 
 // update or edit note
 app.put('/api/notes/:_id', (req, res)=>{
-    console.log(req.params._id);
     let error ={};
     if (req.body.title === '') error.title = "Can't be empty";
     if (req.body.content === '') error.content = "Can't be empty";
+    if (req.body.category === '') error.category = "Can't be empty";
     const isValid = Object.keys(error).length === 0
     if(!isValid){
         res.status(400).json({error});
     }else{
-        const {title, content } = req.body;
+        const {title, content, category } = req.body;
         Note.findOneAndUpdate(
         {_id: req.params._id},
-        {$set: {title, content}},
+        {$set: {title, content, category}},
         {new: true},
         (err, note)=>{
             if(err){
