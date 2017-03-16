@@ -137,9 +137,13 @@ button:hover{
   text-decoration-line: none;
 }
 
+button.start{
+  margin-top:20px;
+}
+
 input.search{
   font-size: 20px;
-  height: 50px;
+  height: 40px;
   padding: 8px;
 }
 

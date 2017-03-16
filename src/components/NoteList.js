@@ -72,10 +72,10 @@ class NoteList extends React.Component {
                         </div>                                   
                     </div>
                     <div className="col-md-2">
-                        <input name='limit' type="text" onChange={this.handleChange} className="form-control input-sm search"  placeholder="Limit..." />                                       
+                        <label>Limit: </label><input name='limit' type="text" onChange={this.handleChange} className="form-control input-sm search"  placeholder="Limit..." />                                       
                     </div>
                     <div className="col-md-2">
-                        <input name='start' type="text" onChange={this.handleChange} className="form-control input-sm search" placeholder="Start..." />                                       
+                         <label>Start:</label><input name='start' type="text" onChange={this.handleChange} className="form-control input-sm search" placeholder="Start..." />                                       
                     </div>
                     <div className="col-md-1">
                         <button type="submit" className="start">Search</button>
