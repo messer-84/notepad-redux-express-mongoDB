@@ -1,6 +1,9 @@
 # This is a React-Redux-Node-MongoDB Full Stack Application
 
 
+![alt tag](https://media.giphy.com/media/xUA7b6JV54IadgcFIQ/giphy.gif)
+
+
 ## Install
 ### Step 1: setup client
    - Go to /notepad
