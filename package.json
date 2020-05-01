@@ -11,7 +11,8 @@
     "react-router-dom": "^4.0.0",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
@@ -25,7 +26,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "babel-node server.js",
-    "client": "babel-node start-client.js"
+    "client": "babel-node start-client.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
-  "proxy": "http://localhost:3001/"
+  "proxy": "http://localhost:3001/",
+  "snyk": true
 }
